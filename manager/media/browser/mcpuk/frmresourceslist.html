@@ -20,6 +20,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="browser.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="js/fckxml.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
@@ -124,8 +125,8 @@ oListManager.AddFile = function ( fileName, fileUrl, fileSize, imageEditable )
 					 + '&ExtraParams=' + oConnector.ExtraParams +
 					'" width="64" height="64" border="0" class="item"><br />' +
 		fileName + '</a><br />';
-	oCell.innerHTML += dLink + '<img border="0" src="images/delete.gif" width="16" height="16" alt="Delete File" title="Delete File"></a>&nbsp;';
-	oCell.innerHTML += eLink + '<img border="0" src="images/edit.gif" width="16" height="16" alt="Edit/Rename File" title="Rename File"></a>' ;
+	oCell.innerHTML += dLink + '<img border="0" src="images/delete.gif" width="16" height="16" alt="Delete File" title="Удалить файл"></a>&nbsp;';
+	oCell.innerHTML += eLink + '<img border="0" src="images/edit.gif" width="16" height="16" alt="Edit/Rename File" title="Переименовать файл"></a>' ;
 
 /**
  * MODx temporary image editor
@@ -189,21 +190,21 @@ function OpenFile( fileUrl )
 
 function DeleteFile( fileName, fileUrl )
 {
-	if (confirm('Are you sure you wish to delete ' + unescape(fileName) + '?')) {
+	if (confirm('Удалить файл ' + unescape(fileName) + '?')) {
 		oConnector.SendCommand( 'DeleteFile', "FileName=" + fileName, DeleteFileCallBack ) ;
 	}
 }
 
 function DeleteFolder( folderName )
 {
-	if (confirm('Are you sure you wish to delete ' + unescape(folderName) + ' and all files in it?')) {
+	if (confirm('Удалить каталог ' + unescape(folderName) + ' and all files in it?')) {
 		oConnector.SendCommand( 'DeleteFolder', "FolderName=" + folderName, DeleteFolderCallBack ) ;
 	}
 }
 
 function RenameFile( fileName, fileUrl )
 {
-	var promptMsg='Please enter the new name for ' + unescape(fileName) + ':';
+	var promptMsg='Введите новое имя файла ' + unescape(fileName) + ':';
 	var newName=prompt(promptMsg,unescape(fileName));
 
 	if ((newName!=null)&&(newName!='')&&(newName!=fileName)) {
@@ -224,7 +225,7 @@ function EditImage( fileName, fileUrl )
 
 function RenameFolder( folderName )
 {
-	var promptMsg='Please enter the new name for ' + unescape(folderName) + ':';
+	var promptMsg='Введите новое имя каталога ' + unescape(folderName) + ':';
 	var newName=prompt(promptMsg,unescape(folderName));
 
 	if ((newName!=null)&&(newName!='')&&(newName!=unescape(folderName))) {
@@ -295,7 +296,7 @@ function DeleteFileCallBack ( fckXml )
 				break;
 
 			case 302 :
-				alert('Failed to delete file.');
+				alert('Ошибка удаления файла.');
 				break;
 
 			default:
@@ -319,7 +320,7 @@ function DeleteFolderCallBack ( fckXml )
 				break;
 
 			case 402 :
-				alert('Failed to delete folder.');
+				alert('Ошибка удаления каталога.');
 				break;
 
 			default:
@@ -342,7 +343,7 @@ function RenameFileCallBack ( fckXml )
 				break;
 
 			case 502 :
-				alert('Failed to rename file.');
+				alert('Ошибка переименования файла.');
 				break;
 
 			default:
@@ -366,7 +367,7 @@ function RenameFolderCallBack ( fckXml )
 				break;
 
 			case 602 :
-				alert('Failed to rename folder.');
+				alert('Ошибка переименования.');
 				break;
 
 			default:

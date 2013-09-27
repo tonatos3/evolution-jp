@@ -17,7 +17,8 @@
 	 * File Authors:
 	 * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
 	-->
-		<title>File Browser</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Обозреватель файлов</title>
 		<link href="browser.css" type="text/css" rel="stylesheet">
 		[+seturl_js+]
 	</head>

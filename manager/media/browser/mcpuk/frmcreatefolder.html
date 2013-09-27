@@ -35,12 +35,12 @@ function CreateFolder()
 	
 	while ( true ) 
 	{
-		sFolderName = prompt( 'Type the name of the new folder:', '' ) ;
+		sFolderName = prompt( 'Введите имя:', '' ) ;
 	
 		if ( sFolderName == null )
 			return ;
 		else if ( sFolderName.length == 0 )
-			alert( 'Please type the folder name' ) ;
+			alert( 'Пожалуйста введите имя' ) ;
 		else
 			break ;
 	}
@@ -60,19 +60,19 @@ function CreateFolderCallBack( fckXml )
 			window.parent.frames['frmResourcesList'].Refresh() ;
 			break ;
 		case 101 :
-			alert( 'Folder already exists' ) ;
+			alert( 'Каталог уже существует' ) ;
 			break ;
 		case 102 :
-			alert( 'Invalid folder name' ) ;
+			alert( 'Недопустимое имя' ) ;
 			break ;
 		case 103 :
-			alert( 'You have no permissions to create the folder' ) ;
+			alert( 'Нехватает разрешений (сервера) для создания каталога' ) ;
 			break ;
 		case 110 :
-			alert( 'Unknown error creating folder' ) ;
+			alert( 'Неизвестная ошибка' ) ;
 			break ;
 		default :
-			alert( 'Error creating folder. Error number: ' + iErrorNumber ) ;
+			alert( 'Ошибка создания. Номер ошибки: ' + iErrorNumber ) ;
 			break ;
 	}
 }
@@ -92,7 +92,7 @@ window.onload = function()
 							<tr>
 								<td><img alt="" src="images/Folder.gif"></td>
 								<td>&nbsp;</td>
-								<td nowrap>Create New Folder</td>
+								<td nowrap>Создать каталог</td>
 							</tr>
 						</table>
 					</button>
