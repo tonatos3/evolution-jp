@@ -98,21 +98,21 @@ class FileUpload {
 		elseif (isset($ext) && $this->cleanFilename($filename) !== $filename)
 		{
 			$filename = date('Ymd-his') . ".{$ext}";
-			$disp = "201,'ファイル名に使えない文字が含まれているため変更しました。'";// (*3)
+			$disp = "201,'Файл переименован, так как использованные символы в имени файла не разрешены'";// (*3)
 		}
 		
 		if (!array_key_exists('NewFile',$_FILES)) $disp="202,'Unable to find uploaded file.'"; //No file uploaded with field name NewFile
 		elseif($_FILES['NewFile']['error'] || ($typeconfig['MaxSize']) < $_FILES['NewFile']['size'])
 		{
-			$disp = "202,'ファイル容量オーバーです。'";//Too big
+			$disp = "202,'Файл слишком большой (".$modx->nicesize($_FILES['NewFile']['size']).") разрешено: ".$modx->nicesize($typeconfig['MaxSize'])."'";//Too big
 		}
 		elseif(!isset($ext))
 		{
-			$disp = "202,'種類を判別できないファイル名です。'";//No file extension to check
+			$disp = "202,'Неразрешенный к загрузке тип файла'";//No file extension to check
 		}
 		elseif (!in_array($ext,$typeconfig['AllowedExtensions']))
 		{
-			$disp = "202,'アップロードできない種類のファイルです。'";//Disallowed file extension
+			$disp = "202,'Неразрешенный к загрузке тип файла'";//Disallowed file extension
 		}
 		else
 		{
@@ -190,7 +190,7 @@ class FileUpload {
 									$basename = basename($target);
 									$disp="201,'{$basename}'";
 								}
-								else $disp="202,'Failed to upload file, internal error.'";
+								else $disp="202,'Ошибка загрузки файла.'";
 							}
 							else
 							{
@@ -200,13 +200,13 @@ class FileUpload {
 									$basename = basename($target);
 									$disp="201,'{$basename}'";
 								}
-								else $disp="202,'Failed to upload file, internal error.'";
+								else $disp="202,'Ошибка загрузки файла.'";
 							}
 							$uploaded_name = "{$filename}({$i}).{$ext}";	// (*4)
 							$taskDone=true;
 						}
 					}
-					if ($taskDone==false) $disp="202,'Failed to upload file, internal error..'";
+					if ($taskDone==false) $disp="202,'Ошибка загрузки файла.'";
 				}
 				else
 				{
@@ -219,7 +219,7 @@ class FileUpload {
 							@chmod($target,$modx->config['new_file_permissions']);
 							$disp='0';
 						}
-						else $disp="202,'Failed to upload file, internal error...'";
+						else $disp="202,'Ошибка загрузки файла...'";
 					}
 					else
 					{
@@ -228,7 +228,7 @@ class FileUpload {
 							@chmod($target,$modx->config['new_file_permissions']);
 							$disp='0';
 						}
-						else $disp="202,'Failed to upload file, internal error...'";
+						else $disp="202,'Ошибка загрузки файла...'";
 					}
 					$uploaded_name = "{$filename}.{$ext}";	// (*4)
 				}
