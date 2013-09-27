@@ -76,6 +76,7 @@ if (isset($data) && count($data) > 0) {
 	
 			case 'lst_custom_contenttype':
 			case 'txt_custom_contenttype':
+            case 'a':
 				// Skip these
 				continue 2;
 				break;

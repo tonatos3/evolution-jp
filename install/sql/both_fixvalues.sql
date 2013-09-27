@@ -26,7 +26,7 @@ INSERT IGNORE INTO `{PREFIX}system_settings`
 ('theme_refresher','');
 
 
-REPLACE INTO `{PREFIX}user_roles` 
+REPLACE INTO `{PREFIX}user_roles`
 (id,name,description,frames,home,view_document,new_document,save_document,publish_document,delete_document,empty_trash,action_ok,logout,help,messages,new_user,edit_user,logs,edit_parser,save_parser,edit_template,settings,credits,new_template,save_template,delete_template,edit_snippet,new_snippet,save_snippet,delete_snippet,edit_chunk,new_chunk,save_chunk,delete_chunk,empty_cache,edit_document,change_password,error_dialog,about,file_manager,save_user,delete_user,save_password,edit_role,save_role,delete_role,new_role,access_permissions,bk_manager,new_plugin,edit_plugin,save_plugin,delete_plugin,new_module,edit_module,save_module,exec_module,delete_module,view_eventlog,delete_eventlog,manage_metatags,edit_doc_metatags,new_web_user,edit_web_user,save_web_user,delete_web_user,web_access_permissions,view_unpublished,import_static,export_static,remove_locks,view_schedule) VALUES 
 (1, 'Administrator', 'Site administrators have full access to all functions',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
 
@@ -150,3 +150,104 @@ REPLACE INTO `{PREFIX}system_eventnames`
 
 # ^ I don't think we need more than 1000 built-in events. Custom events will start at 1001
 
+INSERT IGNORE INTO `{PREFIX}system_settings_group` (`id`, `name`) VALUES
+ (1, 'settings_site'), (2, 'settings_furls'),(3,'settings_users'),
+ (4,'settings_ui'),(5,'settings_misc');
+
+
+INSERT IGNORE INTO `{PREFIX}system_settings_fields` (`setting_name`, `id_group`, `title`, `description`, `sort`, `options`) VALUES
+('server_offset_time', 1, 'server_offset_time_title', 'server_offset_time_message', 24, 'server_offset'),
+('manager_language', 4, 'manager_language_title', 'manager_language_message', 59, 'language'),
+('modx_charset', 1, 'modx_charset_title', 'modx_charset_message', 5, 'select||UTF-8'),
+('site_name', 1, 'site_name_title', 'site_name_message', 1, 'text'),
+('site_start', 1, 'site_start_title', 'site_start_message', 8, 'text'),
+('error_page', 1, 'error_page_title', 'error_page_message', 9, 'text'),
+('unauthorized_page', 1, 'unauthorized_page_title', 'unauthorized_page_message', 10, 'text'),
+('site_status', 1, 'site_status_title', 'site_status_message', 11, 'radio||online=1;offline=0'),
+('cache_type', 1, 'cache_type_title', 'cache_type_message', 18, 'radio||mutate_settings.dynamic.php1=1;mutate_settings.dynamic.php2=2;mutate_settings.dynamic.php3=0'),
+('use_udperms', 3, 'use_udperms_title', 'use_udperms_message', 36, 'radio||yes=1;no=0||depend||udperms_allowroot,tree_show_protected'),
+('udperms_allowroot', 3, 'udperms_allowroot_title', 'udperms_allowroot_message', 37, 'radio||yes=1;no=0'),
+('failed_login_attempts', 3, 'failed_login_attempts_title', 'failed_login_attempts_message', 42, 'text'),
+('blocked_minutes', 3, 'blocked_minutes_title', 'blocked_minutes_message', 43, 'text'),
+('use_captcha', 3, 'use_captcha_title', 'use_captcha_message', 49, 'radio||yes=1;no=0'),
+('emailsender', 3, 'emailsender_title', 'emailsender_message', 51, 'text'),
+('use_editor', 4, 'use_editor_title', 'use_editor_message', 74, 'radio||yes=1;no=0||depend||which_editor,fe_editor_lang,editor_css_path'),
+('use_browser', 5, 'use_browser_title', 'use_browser_message', 86, 'radio||yes=1;no=0||depend||strip_image_paths,rb_webuser,rb_base_url,clean_uploaded_filename,image_limit_width'),
+('fe_editor_lang', 4, 'fe_editor_lang_title', 'fe_editor_lang_message', 76, 'language'),
+('manager_theme', 4, 'manager_theme_title', 'manager_theme_message', 57, 'manager_theme'),
+('site_slogan', 1, 'site_slogan_title', 'site_slogan_message', 2, 'textarea'),
+('site_url', 1, 'site_url_title', 'site_url_message', 3, 'text'),
+('base_url', 1, 'base_url_title', 'base_url_message', 4, 'text'),
+('doc_encoding', 1, 'doc_encoding_title', 'doc_encoding_message', 6, 'select||UTF-8;SJIS-win;eucJP-win;Windows-1251;Windows-1252;KOI8-R;ISO-8859-1;ISO-8859-2;ISO-8859-3;ISO-8859-4;ISO-8859-5;ISO-8859-6;ISO-8859-7;ISO-8859-8;ISO-8859-9;ISO-8859-10;Shift_JIS;EUC-JP;BIG-5'),
+('xhtml_urls', 1, 'xhtml_urls_title', 'xhtml_urls_message', 7, 'radio||yes=1;no=0'),
+('site_unavailable_page', 1, 'site_unavailable_page_title', 'site_unavailable_page_message', 12, 'text'),
+('site_unavailable_message', 1, 'site_unavailable_message_title', 'site_unavailable_message_message', 13, 'textarea_lang'),
+('track_visitors', 1, 'track_visitors_title', 'track_visitors_message', 14, 'radio||yes=1;no=0'),
+('auto_template_logic', 1, 'auto_template_logic_title', 'auto_template_logic_message', 15, 'radio||defaulttemplate_logic_system_message=system;defaulttemplate_logic_parent_message=parent;defaulttemplate_logic_sibling_message=sibling'),
+('default_template', 1, 'default_template_title', 'default_template_message', 16, 'template'),
+('publish_default', 1, 'publish_default_title', 'publish_default_message', 17, 'radio||yes=1;no=0'),
+('cache_default', 1, 'cache_default_title', 'cache_default_message', 19, 'radio||yes=1;no=0'),
+('search_default', 1, 'search_default_title', 'search_default_message', 20, 'radio||yes=1;no=0'),
+('auto_menuindex', 1, 'auto_menuindex_title', 'auto_menuindex_message', 21, 'radio||yes=1;no=0'),
+('custom_contenttype', 1, 'custom_contenttype_title', 'custom_contenttype_message', 22, 'custom_contenttype'),
+('docid_incrmnt_method', 1, 'docid_incrmnt_method_title', 'docid_incrmnt_method_message', 23, 'radio||docid_incrmnt_method_0=0;docid_incrmnt_method_1=1;docid_incrmnt_method_2=2'),
+('server_protocol', 1, 'server_protocol_title', 'server_protocol_message', 25, 'radio||server_protocol_http=http;server_protocol_https=https'),
+('output_filter', 1, 'output_filter_title', 'output_filter_message', 26, 'radio||Enable=1;Disable=0'),
+('friendly_urls', 2, 'friendly_urls_title', 'friendly_urls_message', 27, 'radio||yes=1;no=0||depend||friendly_url_prefix,friendly_url_suffix,make_folders,friendly_alias_urls,use_alias_path,allow_duplicate_alias,automatic_alias'),
+('friendly_url_prefix', 2, 'friendly_url_prefix_title', 'friendly_url_prefix_message', 28, 'text'),
+('friendly_url_suffix', 2, 'friendly_url_suffix_title', 'friendly_url_suffix_message', 29, 'text'),
+('make_folders', 2, 'make_folders_title', 'make_folders_message', 30, 'radio||yes=1;no=0'),
+('friendly_alias_urls', 2, 'friendly_alias_urls_title', 'friendly_alias_urls_message', 31, 'radio||yes=1;no=0'),
+('use_alias_path', 2, 'use_alias_path_title', 'use_alias_path_message', 32, 'radio||yes=1;no=0'),
+('allow_duplicate_alias', 2, 'allow_duplicate_alias_title', 'allow_duplicate_alias_message', 33, 'radio||yes=1;no=0'),
+('automatic_alias', 2, 'automatic_alias_title', 'automatic_alias_message', 34, 'radio||pagetitle=1;numbering in each folder=2;disabled=0'),
+('check_files_onlogin', 3, 'check_files_onlogin_title', 'check_files_onlogin_message', 35, 'textarea'),
+('tree_show_protected', 3, 'tree_show_protected_title', 'tree_show_protected_message', 38, 'radio||yes=1;no=0'),
+('default_role', 3, 'default_role_title', 'default_role_message', 39, 'role_list'),
+('validate_referer', 3, 'validate_referer_title', 'validate_referer_message', 40, 'radio||yes=1;no=0'),
+('allow_mgr2web', 3, 'allow_mgr2web_title', 'allow_mgr2web_message', 41, 'radio||yes=1;no=0'),
+('auto_sleep_user', 3, 'auto_sleep_user_title', 'auto_sleep_user_message', 44, 'text'),
+('error_reporting', 3, 'error_reporting_title', 'error_reporting_message', 45, 'radio||a17_error_reporting_opt0=0;a17_error_reporting_opt1=1;a17_error_reporting_opt2=2;a17_error_reporting_opt99=99'),
+('send_errormail', 3, 'send_errormail_title', 'send_errormail_message', 46, 'radio||mutate_settings.dynamic.php7=0;error=3;error + warning=2;error + warning + information=1'),
+('warning_visibility', 3, 'warning_visibility_title', 'warning_visibility_message', 47, 'radio||administrators=0;a17_warning_opt2=2;everybody=1'),
+('pwd_hash_algo', 3, 'pwd_hash_algo_title', 'pwd_hash_algo_message', 48, 'hash_algo'),
+('captcha_words', 3, 'captcha_words_title', 'captcha_words_message', 50, 'text_lang'),
+('emailsubject', 3, 'emailsubject_title', 'emailsubject_message', 52, 'text_lang'),
+('signupemail_message', 3, 'signupemail_message_title', 'signupemail_message_message', 53, 'textarea_lang'),
+('websignupemail_message', 3, 'websignupemail_message_title', 'websignupemail_message_message', 54, 'textarea_lang'),
+('webpwdreminder_message', 3, 'webpwdreminder_message_title', 'webpwdreminder_message_message', 55, 'textarea_lang'),
+('enable_bindings', 3, 'enable_bindings_title', 'enable_bindings_message', 56, 'radio||yes=1;no=0'),
+('manager_inline_style', 4, 'manager_inline_style_title', 'manager_inline_style_message', 58, 'textarea'),
+('topmenu_site', 4, 'topmenu_site_title', 'topmenu_site_message', 60, 'topmenu'),
+('limit_by_container', 4, 'limit_by_container_title', 'limit_by_container_message', 61, 'text'),
+('tree_pane_open_default', 4, 'tree_pane_open_default_title', 'tree_pane_open_default_message', 62, 'radio||open=1;close=0'),
+('tree_page_click', 4, 'tree_page_click_title', 'tree_page_click_message', 62, 'radio||edit_resource=27;doc_data_title=3;tree_page_click_option_auto=auto'),
+('remember_last_tab', 4, 'remember_last_tab_title', 'remember_last_tab_message', 63, 'radio||yes_full=2;yes_stay=1;no=0'),
+('resource_tree_node_name', 4, 'resource_tree_node_name_title', 'resource_tree_node_name_message', 64, 'select||pagetitle;menutitle;alias;createdon;editedon;publishedon'),
+('top_howmany', 4, 'top_howmany_title', 'top_howmany_message', 65, 'text'),
+('datepicker_offset', 4, 'datepicker_offset_title', 'datepicker_offset_message', 67, 'text'),
+('datetime_format', 4, 'datetime_format_title', 'datetime_format_message', 68, 'select||dd-mm-YYYY;mm/dd/YYYY;YYYY/mm/dd'),
+('number_of_logs', 4, 'number_of_logs_title', 'number_of_logs_message', 69, 'text'),
+('mail_check_timeperiod', 4, 'mail_check_timeperiod_title', 'mail_check_timeperiod_message', 70, 'text'),
+('number_of_messages', 4, 'number_of_messages_title', 'number_of_messages_message', 71, 'text'),
+('pm2email', 4, 'pm2email_title', 'pm2email_message', 72, 'radio||yes=1;no=0'),
+('number_of_results', 4, 'number_of_results_title', 'number_of_results_message', 73, 'text'),
+('which_editor', 4, 'which_editor_title', 'which_editor_message', 75, 'which_editor'),
+('editor_css_path', 4, 'editor_css_path_title', 'editor_css_path_message', 77, 'text'),
+('filemanager_path', 5, 'filemanager_path_title', 'filemanager_path_message', 78, 'path'),
+('upload_files', 5, 'upload_files_title', 'upload_files_message', 79, 'text'),
+('upload_images', 5, 'upload_images_title', 'upload_images_message', 80, 'text'),
+('upload_media', 5, 'upload_media_title', 'upload_media_message', 81, 'text'),
+('upload_flash', 5, 'upload_flash_title', 'upload_flash_message', 82, 'text'),
+('upload_maxsize', 5, 'upload_maxsize_title', 'upload_maxsize_message', 83, 'upload_maxsize'),
+('new_file_permissions', 5, 'new_file_permissions_title', 'new_file_permissions_message', 84, 'text'),
+('new_folder_permissions', 5, 'new_folder_permissions_title', 'new_folder_permissions_message', 85, 'text'),
+('strip_image_paths', 5, 'strip_image_paths_title', 'strip_image_paths_message', 87, 'radio||yes=1;no=0'),
+('rb_webuser', 5, 'rb_webuser_title', 'rb_webuser_message', 88, 'radio||yes=1;no=0'),
+('rb_base_dir', 5, 'rb_base_dir_title', 'rb_base_dir_message', 89, 'base_dir'),
+('rb_base_url', 5, 'rb_base_url_title', 'rb_base_url_message', 90, 'text'),
+('clean_uploaded_filename', 5, 'clean_uploaded_filename_title', 'clean_uploaded_filename_message', 91, 'radio||yes=1;no=0'),
+('image_limit_width', 5, 'image_limit_width_title', 'image_limit_width_message', 92, 'text');
+
+
+REPLACE INTO `{PREFIX}system_eventnames` (id,name,service,groupname) VALUES ('101','OnSystemSettingsRender','1','System Settings');

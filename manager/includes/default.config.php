@@ -52,7 +52,7 @@ $default_config['site_name']                = 'My MODX Site';
 $default_config['site_slogan']              = 'ここにサイトのスローガン文を表示します。';
 $default_config['site_start']               = '1';
 $default_config['site_status']              = "1";
-$default_config['site_unavailable_message'] = $_lang['siteunavailable_message'];
+$default_config['site_unavailable_message'] = $_lang['site_unavailable_message_default'];//'サイトは現在メンテナンス中です。しばらくお待ちください。';
 $default_config['strip_image_paths']        = '0';
 $default_config['suffix_mode']              = '1';
 $default_config['top_howmany']              = '10';
@@ -96,9 +96,9 @@ $default_config['check_files_onlogin']      = "index.php\n.htaccess\nmanager/ind
 
 if(!isset($_GET['a']) || $_GET['a'] !=='17') return $default_config;
 
-$default_config['signupemail_message']    = $_lang['system_email_signup'];
-$default_config['websignupemail_message'] = $_lang['system_email_websignup'];
-$default_config['webpwdreminder_message'] = $_lang['system_email_webreminder'];
+$default_config['signupemail_message']    = $_lang['signupemail_message_default'];
+$default_config['websignupemail_message'] = $_lang['websignupemail_message_default'];
+$default_config['webpwdreminder_message'] = $_lang['webpwdreminder_message_default'];
 
 $default_config['enable_bindings'] = '0';
 $default_config['make_folders']    = '1';
